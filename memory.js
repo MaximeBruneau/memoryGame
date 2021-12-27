@@ -1,57 +1,22 @@
 //https://www.youtube.com/watch?v=QxnVao2qTwI
-
+var url = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=917e53ab462e15208d6f96b2cbacfb10&tags=cat&format=json&nojsoncallback=1&api_sig=e233fc4a0cfad30b2f3302a1c9fbb3e0";
 const divGame = document.querySelector("#game");
 const divResultat = document.querySelector("#resultat");
 var oldSelection = [];
 var nbAffiche=0;
 var ready = true;
+var tag = "dog";
+var nbPaire;
+var nbPLigne;
+var nbPColonne;
 
 var links = new Map();
-setLinks();
 
-var choixTaille=1;
-switch (choixTaille)
-{
-case 1:
-    //16 cartes, 8 dessins différents
-    var tabJeu = [
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-    ];
-    break;
-case 2:
-        //30 cartes, 15 dessins différents
-    var tabJeu = [
-        [0,0,0,0,0,0],
-        [0,0,0,0,0,0],
-        [0,0,0,0,0,0],
-        [0,0,0,0,0,0],
-        [0,0,0,0,0,0],
-    ];
-    break;
-case 3:
-            //42 cartes, 21 dessins différents
 
-    var tabJeu = [
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        
-    ];
-    break;
-default: 
-var tabJeu = [
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0],
-];
-}
+var choixTaille=3;
+var tabJeu=jeuBonneTaille(choixTaille);
+setLinks(tag);
+
 
 
 /*var tabResultat = [
@@ -69,13 +34,17 @@ afficherTableau();
 
 function afficherTableau(){
     var txt="";
+
     for(var i=0; i < tabJeu.length ; i++)
     {
+     
+
         txt += "<div>";
 
         for (var j=0; j < tabJeu[i].length ; j++)
 
         {
+        
 
             if (tabJeu[i][j] === 0)
             {
@@ -91,6 +60,31 @@ function afficherTableau(){
         txt += "</div>";
     } 
     divGame.innerHTML=txt;
+}
+
+function setLinks(tag)
+{
+    $(document).ready(function(){
+
+    $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+    {
+        tags: tag,
+        tagmode: "any",
+        format: "json"
+    },
+    function(data) {           
+
+        for (let i = 0; i < data.items.length; i++)
+        {
+            var image_src = data.items[i]['media']['m'].replace("_m", "_b");
+            links.set(i,image_src);
+    
+        }
+
+    });
+
+});
+
 }
 
  function getImage(valeur)
@@ -137,6 +131,13 @@ function afficherTableau(){
                 divResultat.innerHTML=txt;
             }
 
+            else
+            {
+                txt += "<div> <h2> Compteur de coups:  "+compteurDeCoups+" : </h2> </div>";
+                divResultat.innerHTML=txt;
+
+            }
+
         }
         else
         {oldSelection=[ligne,colonne];}
@@ -154,7 +155,7 @@ function afficherTableau(){
             case 2: var nbImagePosition=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
                 break;
-            case 3: var nbImagePosition=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+            case 3: var nbImagePosition=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
                 break;
             default: var nbImagePosition=[0,0,0,0,0,0,0,0];
@@ -162,16 +163,16 @@ function afficherTableau(){
         }
 
 
-        for(var i=0 ; i<4 ; i++)
+        for(var i=0 ; i<nbPColonne ; i++)
         {
             var ligne = [];
 
-            for (var j=0 ;  j < 4 ; j++)
+            for (var j=0 ;  j <  nbPLigne   ; j++)
             {
                 var fin = false;
                 while (!fin)
                 {                
-                var randomImage = getRndInteger(0,9);
+                var randomImage = getRndInteger(0,20);
                
 
                 if (nbImagePosition[randomImage] < 2 )
@@ -195,9 +196,9 @@ function afficherTableau(){
 
       {
           var onGoing=false;
-          for(var i=0 ; i < 4 ; i++)
+          for(var i=0 ; i < nbPColonne ; i++)
         {
-            for (var j=0 ;  j < 4 ; j++)
+            for (var j=0 ;  j < nbPLigne ; j++)
             {
                 if (tabJeu[i][j]==0)
                 { onGoing=true;
@@ -208,9 +209,74 @@ function afficherTableau(){
         return onGoing;
 
       }
+      function jeuBonneTaille(taille){
+    
+        switch (choixTaille)
+        {
+        case 1:
+            //16 cartes, 8 dessins différents
+            var tabJeu = [
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0],
+            ];
+            nbPaire=8;
+            nbPLigne=4;
+            nbPColonne=4;
+            
+            
+            break;
+        case 2:
+                //30 cartes, 15 dessins différents
+            var tabJeu = [
+                [0,0,0,0,0,0],
+                [0,0,0,0,0,0],
+                [0,0,0,0,0,0],
+                [0,0,0,0,0,0],
+                [0,0,0,0,0,0],
+            ];
+            nbPaire=15;
+            nbPLigne=6;
+            nbPColonne=5;
+            break;
+        case 3:
+                    //42 cartes, 21 dessins différents
+        
+            var tabJeu = [
+                [0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0],
+                
+            ];
+            nbPaire=20;
+            nbPLigne=8;
+            nbPColonne=5;
+            break;
+        default: 
+        var tabJeu = [
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,0,0,0],
+        ];
+        nbPaire=8;
+        nbPLigne=4;
+        nbPColonne=4;
+        }
+        return tabJeu;
+        }
 
-function setLinks()
+
+/*function setLinks(tag)
 {
+    for (let i = 1; i < 20; i++)
+    {
+        links.set(i,getPictureUrl(tag,i));
+
+    }
     links.set(1,"https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg");
     links.set(2,"https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg");
     links.set(3,"https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg");
@@ -222,22 +288,5 @@ function setLinks()
 
 
 
-            /*case 1 : imgTxt += "https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg";
-        break;
-        case 2 :imgTxt += "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg";
-        break;
-        case 3 :imgTxt += "https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1057506940?k=20&m=1057506940&s=612x612&w=0&h=3j5EA6YFVg3q-laNqTGtLxfCKVR3_o6gcVZZseNaWGk=";
-        break;
-        case 4 :imgTxt += "https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg";
-        break;
-        case 5 :imgTxt += "https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg";
-        break;
-        case 6 :imgTxt += "https://img-19.ccm2.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg";
-        break;
-        case 7 :imgTxt += "https://www.akamai.com/content/dam/site/im-demo/perceptual-standard.jpg?imbypass=true";
-        break;
-        case 8 :imgTxt += "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQyotXaBF8Nf5YH5jB4ilXNcn2yN0-6iGfOw&usqp=CAU";
-        break;
-        default : console.log("cas non pris en compte");*/
     
-}
+}*/
