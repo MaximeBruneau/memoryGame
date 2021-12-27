@@ -56,12 +56,12 @@ function afficherTableau(){
 
             if (tabJeu[i][j] === 0)
             {
-                txt += "<button class='btn btn-primary m-2' style='width:130px;height:100px' onClick='verif(\""+i+"-"+j+"\")' >Afficher</button>";
+                txt += "<button class='btn btn-primary m-2' style='width:100px;height:100px' onClick='verif(\""+i+"-"+j+"\")' >Afficher</button>";
 
             }
             else
             {
-                txt += "<img src='"+getImage(tabJeu[i][j])+"' style='width:130px;height:100px' class='m-2'>";
+                txt += "<img src='"+getImage(tabJeu[i][j])+"' style='width:100px;height:100px' class='m-2'>";
             }
 
         }
