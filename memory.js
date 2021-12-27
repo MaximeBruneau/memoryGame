@@ -5,15 +5,23 @@ const divResultat = document.querySelector("#resultat");
 var oldSelection = [];
 var nbAffiche=0;
 var ready = true;
-var tag = "dog";
 var nbPaire;
 var nbPLigne;
 var nbPColonne;
 
+//On recupere les parametres entrés lors du choix
+const queryString = window.location.search;
+
+const urlParams = new URLSearchParams(queryString);
+
+const tag = urlParams.get('tag');
+const choixTaille = parseInt(urlParams.get('taille'),10);
+
+
 var links = new Map();
 
 
-var choixTaille=3;
+//var choixTaille=3;
 var tabJeu=jeuBonneTaille(choixTaille);
 setLinks(tag);
 
