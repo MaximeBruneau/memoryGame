@@ -5,15 +5,23 @@ const divResultat = document.querySelector("#resultat");
 var oldSelection = [];
 var nbAffiche=0;
 var ready = true;
-var tag = "dog";
 var nbPaire;
 var nbPLigne;
 var nbPColonne;
 
+//On recupere les parametres entrés lors du choix
+const queryString = window.location.search;
+
+const urlParams = new URLSearchParams(queryString);
+
+const tag = urlParams.get('tag');
+const choixTaille = parseInt(urlParams.get('taille'),10);
+
+
 var links = new Map();
 
 
-var choixTaille=3;
+//var choixTaille=3;
 var tabJeu=jeuBonneTaille(choixTaille);
 setLinks(tag);
 
@@ -48,12 +56,12 @@ function afficherTableau(){
 
             if (tabJeu[i][j] === 0)
             {
-                txt += "<button class='btn btn-primary m-2' style='width:100px;height:100px' onClick='verif(\""+i+"-"+j+"\")' >Afficher</button>";
+                txt += "<button class='btn btn-primary m-2' style='width:130px;height:100px' onClick='verif(\""+i+"-"+j+"\")' >Afficher</button>";
 
             }
             else
             {
-                txt += "<img src='"+getImage(tabJeu[i][j])+"' style='width:100px;height:100px' class='m-2'>";
+                txt += "<img src='"+getImage(tabJeu[i][j])+"' style='width:130px;height:100px' class='m-2'>";
             }
 
         }
