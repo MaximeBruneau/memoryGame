@@ -9,7 +9,7 @@ var nbPaire;
 var nbPLigne;
 var nbPColonne;
 
-//On recupere les parametres entrés lors du choix
+var mot="dog";
 const queryString = window.location.search;
 
 const urlParams = new URLSearchParams(queryString);
@@ -17,6 +17,35 @@ const urlParams = new URLSearchParams(queryString);
 const tag = urlParams.get('tag');
 const choixTaille = parseInt(urlParams.get('taille'),10);
 const name = urlParams.get('name');
+
+setLinksGoogleImage(tag);
+
+function setLinksGoogleImage(tag)
+{
+
+    var j =0;
+    var index=1;
+    console.log("yes")
+
+    for (index=1;index<30;index+=10)
+    {  $.getJSON( "https://www.googleapis.com/customsearch/v1?key=AIzaSyCpUbZzJWYL6fftZqfJPSwDgOeOsitgpRY&cx=7a0e2b71e4da01ce4&q="+tag+"s&searchType=image&fileType=jpg&start="+index+"&imgSize=xlarge&alt=json",
+    function (jss) {
+        console.log(jss);
+        $.each(jss.items, function(i,item){    
+           $("body").append("<img src=" + item.link + ">");
+        });
+});}
+
+  
+
+
+}
+
+
+
+
+//On recupere les parametres entrés lors du choix
+
 
 
 var links = new Map();
