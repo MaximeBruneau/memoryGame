@@ -9,7 +9,7 @@ var nbPaire;
 var nbPLigne;
 var nbPColonne;
 
-//On recupere les parametres entrés lors du choix
+var mot="dog";
 const queryString = window.location.search;
 
 const urlParams = new URLSearchParams(queryString);
@@ -18,13 +18,50 @@ const tag = urlParams.get('tag');
 const choixTaille = parseInt(urlParams.get('taille'),10);
 const name = urlParams.get('name');
 
+setLinksGoogleImage(tag);
+
+function setLinksGoogleImage(tag)
+{
+
+    var j =0;
+    var index=1;
+
+    for (index=1;index<20;index+=10)
+
+    { $.getJSON( "https://www.googleapis.com/customsearch/v1?key=AIzaSyCpUbZzJWYL6fftZqfJPSwDgOeOsitgpRY&cx=7a0e2b71e4da01ce4&q="+tag+"s&searchType=image&fileType=png&start="+index+"&imgSize=xlarge&alt=json",
+    function (jss) { 
+        
+        $.each(jss.items, function(i,item){  
+            console.log('link numero'+j);
+            console.log(item.link);  
+            links.set(j,item.link);
+            j++;
+            //$("body").append("<img src=" + item.link + ">");
+         });
+       
+
+        });
+};
+}
+
+  
+
+
+
+
+
+
+
+//On recupere les parametres entrés lors du choix
+
+
 
 var links = new Map();
 
 
 //var choixTaille=3;
 var tabJeu=jeuBonneTaille(choixTaille);
-setLinks(tag);
+///setLinks(tag);
 
 
 
@@ -105,6 +142,7 @@ function setLinks(tag)
 }
     function verif(bouton)
     {
+       
         var txt="";
         if (ready)
         {
@@ -112,6 +150,8 @@ function setLinks(tag)
         var ligne = bouton.substr(0,1);
         var colonne = bouton.substr(2,1);
         tabJeu[ligne][colonne] = tabResultat[ligne][colonne];
+        console.log("boutton");
+        console.log(tabResultat[ligne][colonne]);
         afficherTableau();
 
         if (nbAffiche>1)
