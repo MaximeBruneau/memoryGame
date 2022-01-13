@@ -7,7 +7,7 @@ body {
 }
 
 #main {
-  background-image: url("/images/memo2.png");
+  background-image: url("../images/memo2.png");
   padding-top: 30px;
   overflow-wrap: break-word; /*coupe le mot sinon ça déborde sur le côté*/
 

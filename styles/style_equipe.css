@@ -5,7 +5,7 @@ body {
     display: flex; /*précisé pour pouvoir positionner le footer tout en bas*/
     flex-direction: column; /*précisé pour pouvoir positionner le footer tout en bas*/
     /* background: url("/images/illustration_memory.png"); */
-    background: url("/images/memo2.png") ;
+    background: url("../images/memo2.png") ;
 }
   
 #main {
