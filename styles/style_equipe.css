@@ -4,7 +4,6 @@ html, body {
 body {
     display: flex; /*précisé pour pouvoir positionner le footer tout en bas*/
     flex-direction: column; /*précisé pour pouvoir positionner le footer tout en bas*/
-    /* background: url("/images/illustration_memory.png"); */
     background: url("../images/memo2.png") ;
 }
   
@@ -53,12 +52,6 @@ body {
     height:120px;
     border: 3px solid black;
     border-radius: 4px;
-
-    /* -webkit-transition: all 400ms ease-out;
-    -moz-transition: all 400ms ease-out;
-    -o-transition: all 400ms ease-out;
-    -ms-transition: all 400ms ease-out;
-    transition: all 400ms ease-out; */
     text-align:center;
 }
 
@@ -79,12 +72,6 @@ body {
     height:120px;
     border: 3px solid black;
     border-radius: 4px;
-
-    /* -webkit-transition: all 400ms ease-out;
-    -moz-transition: all 400ms ease-out;
-    -o-transition: all 400ms ease-out;
-    -ms-transition: all 400ms ease-out;
-    transition: all 400ms ease-out; */
     text-align:center;
 }
 

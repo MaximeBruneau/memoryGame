@@ -20,13 +20,3 @@ function to_the_top() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
-
-//fonction pour ouvrir le menu burger 
-function open_sidebar() {
-    document.getElementById("mySidebar").style.display = "block";
-}
-
-//fonction pour fermer le menu burger 
-function close_sidebar() {
-    document.getElementById("mySidebar").style.display = "none";
-}
