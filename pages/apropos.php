@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<link href="/styles/style_apropos.css" rel="stylesheet" type="text/css" media="screen" />
-<script type="text/javascript" src="/actions/script_actions.js"></script>
+<link href="../styles/style_apropos.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="../actions/script_actions.js"></script>
 <html>
 
 <head>
@@ -29,7 +29,7 @@
         </ol>
       </div>
 
-      <img src="/images/cards.png" id="cards">
+      <img src="../images/cards.png" id="cards">
 
       <h2 id="principe">Principe</h2>
       <hr>
@@ -39,7 +39,7 @@
         <span>Ce jeu se joue souvent avec des cartes spécifiques, disponibles à l’achat dans divers commerces (de nombreux thèmes existent), mais l’on peut se débrouiller avec un jeu de cartes classiques ou bien avec des photos ou dessins personnalisés. Tout compte fait, ce jeu ne requiert pas réellement de matériel précis.</span>
       </p>
 
-      <img src="/images/rules.png" id="rules">
+      <img src="../images/rules.png" id="rules">
 
       <h2 id="regles">Règles du jeu</h2>
       <hr>
@@ -54,7 +54,7 @@
       <p class="paragraphe_1">
         <span>Ici, nous vous proposons une version en ligne où les cartes habituelles sont remplacées par des images présentes sur Internet.</span>
         <span>Pour jouer, rien de compliqué : vous entrez tout d’abord votre nom puis un mot-clé qui définira le thème de votre partie de memory. Enfin, il vous faudra choisir un niveau de difficulté qui fixera la taille de la grille : une grille facile correspond à 16 cartes, moyenne à 30 cartes et difficile à 40.</span>
-        <span>Ensuite, vous validez vos choix et pouvez commencer à <u><a href="/pages/accueil.php" title="retour à l'accueil">jouer</a></u> !</span>
+        <span>Ensuite, vous validez vos choix et pouvez commencer à <u><a href="../pages/accueil.php" title="retour à l'accueil">jouer</a></u> !</span>
       </p>
 
       <h2 id="avantages">Ses avantages</h2>
@@ -64,7 +64,7 @@
         <span>Ce jeu peut paraître enfantin au premier abord, mais il est un excellent exercice pour la mémoire ! Une étude de l’université de Toronto (<i><u><a href="https://www.cmaj.ca/content/185/10/881" target="_blank">source</a></i></u>) a démontré que la pratique d’une activité stimulant le cerveau tout au long de sa vie permet d’en améliorer les capacités. Les jeux de mémoire deviennent alors très utiles et peuvent même aider à retarder et lutter contre la maladie d’Alzheimer. Voyons plus en détail les bienfaits du memory, aussi bien pour les enfants que pour les personnes âgées.</span>
       </p>
 
-      <img src="/images/children_playing.jpg" id="children_playing">
+      <img src="../images/children_playing.jpg" id="children_playing">
 
       <h3>Pour les enfants
         <hr>
@@ -81,7 +81,7 @@
       </ul>
       </p>
 
-      <img src="/images/cerveau_stimul.png" id="cerveau_stimul">
+      <img src="../images/cerveau_stimul.png" id="cerveau_stimul">
 
       <h3>Pour les séniors
         <hr>
@@ -97,7 +97,7 @@
 
     <!--bouton qui permet de retourner en haut de la page-->
     <!--ne s'affiche que lorsque qu'on a fait défilé la page-->
-    <p id="bouton_retour_haut"><img src="/images/up_arrow.png" alt="Retour en haut" title="Retour en haut" OnClick="to_the_top()"></p>
+    <p id="bouton_retour_haut"><img src="../images/up_arrow.png" alt="Retour en haut" title="Retour en haut" OnClick="to_the_top()"></p>
 
 
     <div id="marge"></div>
@@ -108,8 +108,8 @@
 
 <footer>
   <span>2022</span>
-  <span><a href="/pages/accueil.php">Memory</a></span>
-  <span><a href="/pages/equipe.php">L'équipe</a></span>
+  <span><a href="../pages/accueil.php">Memory</a></span>
+  <span><a href="../pages/equipe.php">L'équipe</a></span>
 </footer>
 
 </html>
