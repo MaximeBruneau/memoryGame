@@ -1,24 +1,33 @@
 //https://www.youtube.com/watch?v=QxnVao2qTwI
-var url = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=917e53ab462e15208d6f96b2cbacfb10&tags=cat&format=json&nojsoncallback=1&api_sig=e233fc4a0cfad30b2f3302a1c9fbb3e0";
 const divGame = document.querySelector("#game");
 const divResultat = document.querySelector("#resultat");
+const divConsignes = document.querySelector("#consignes");
+
 var oldSelection = [];
 var nbAffiche=0;
 var ready = true;
 var nbPaire;
 var nbPLigne;
 var nbPColonne;
-
-var mot="dog";
 const queryString = window.location.search;
-
 const urlParams = new URLSearchParams(queryString);
-
 const tag = urlParams.get('tag');
 const choixTaille = parseInt(urlParams.get('taille'),10);
 const name = urlParams.get('name');
-
+//On remplit un dictionnaire avec les images liées au tag
 setLinksGoogleImage(tag);
+//On recupere les parametres entrés lors du choix
+
+var links = new Map();
+var tabJeu=jeuBonneTaille(choixTaille);
+var compteurDeCoups=0;
+
+
+var tabResultat = genereTableauAleatoire(choixTaille);
+//On prepare le tableau avec les images qui sont de base cachées, les images sont 
+//recupérées depuis le dictionnaire initialisé avant
+afficherTableau();
+
 
 function setLinksGoogleImage(tag)
 {
@@ -28,7 +37,7 @@ function setLinksGoogleImage(tag)
 
     for (index=1;index<20;index+=10)
 
-    { $.getJSON( "https://www.googleapis.com/customsearch/v1?key=AIzaSyCpUbZzJWYL6fftZqfJPSwDgOeOsitgpRY&cx=7a0e2b71e4da01ce4&q="+tag+"s&searchType=image&fileType=png&start="+index+"&imgSize=xlarge&alt=json",
+    { $.getJSON( "https://www.googleapis.com/customsearch/v1?key=AIzaSyCpUbZzJWYL6fftZqfJPSwDgOeOsitgpRY&cx=7a0e2b71e4da01ce4&q="+tag+"s&searchType=image&fileType=png&start="+index+"&imgSize=medium&alt=json",
     function (jss) { 
         
         $.each(jss.items, function(i,item){  
@@ -44,42 +53,13 @@ function setLinksGoogleImage(tag)
 };
 }
 
-  
-
-
-
-
-
-
-
-//On recupere les parametres entrés lors du choix
-
-
-
-var links = new Map();
-
-
-//var choixTaille=3;
-var tabJeu=jeuBonneTaille(choixTaille);
-///setLinks(tag);
-
-
-
-/*var tabResultat = [
-    [2,1,1,2],
-    [4,4,5,7],
-    [5,3,6,8],
-    [6,8,7,3],
-];*/
-var compteurDeCoups=0;
-
-
-var tabResultat = genereTableauAleatoire(choixTaille);
-
-afficherTableau();
-
 function afficherTableau(){
     var txt="";
+
+    //txt += "<div> <h2> Nombre de tentatives :  "+compteurDeCoups+"  </h2> </div>";
+    divConsignes.innerHTML="<div id=\"consignes\"> <h3 style=\"font-style:italic;color:green;text-align:center;\">Trouvez toutes les paires !  </h3> </div>";
+
+
 
     for(var i=0; i < tabJeu.length ; i++)
     {
@@ -171,18 +151,18 @@ function setLinks(tag)
                 ready=true;
                 nbAffiche=0;
 
-            },1000);
+            },2500);
 
             compteurDeCoups++;
             if (ifOnGoing()==false)
             {
-                txt += "<div> <h2> Bravo vous avez réussi en "+compteurDeCoups+" coups! </h2> </div>";
+                txt += "<div> <h2> Bravo vous avez réussi en "+compteurDeCoups+" tentatives! </h2> </div>";
                 divResultat.innerHTML=txt;
             }
 
             else
             {
-                txt += "<div> <h2> Compteur de coups:  "+compteurDeCoups+" : </h2> </div>";
+                txt += "<div> <h2> Nombre de tentatives :  "+compteurDeCoups+"  </h2> </div>";
                 divResultat.innerHTML=txt;
 
             }
@@ -319,23 +299,3 @@ function setLinks(tag)
         }
 
 
-/*function setLinks(tag)
-{
-    for (let i = 1; i < 20; i++)
-    {
-        links.set(i,getPictureUrl(tag,i));
-
-    }
-    links.set(1,"https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg");
-    links.set(2,"https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg");
-    links.set(3,"https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg");
-    links.set(4,"https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg");
-    links.set(5,"https://www.akamai.com/content/dam/site/im-demo/perceptual-standard.jpg?imbypass=true");
-    links.set(6,"https://img-19.ccm2.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg");
-    links.set(7,"https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1057506940?k=20&m=1057506940&s=612x612&w=0&h=3j5EA6YFVg3q-laNqTGtLxfCKVR3_o6gcVZZseNaWGk=");
-    links.set(8,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQyotXaBF8Nf5YH5jB4ilXNcn2yN0-6iGfOw&usqp=CAU");
-
-
-
-    
-}*/
